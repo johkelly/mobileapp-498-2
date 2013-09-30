@@ -30,7 +30,7 @@ public class EquipmentModelController {
 	{	
 		// This one is async
 		//new DownloadEquipmentTask().execute(AllObjectsEndpoint);
-		
+		objects = new ArrayList<Equipment>();
 		// Try doing this one first
 		try {
 			JSONArray jsonArray = new JSONArray(readURL(AllObjectsEndpoint));
