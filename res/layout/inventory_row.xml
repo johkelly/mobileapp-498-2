@@ -3,7 +3,8 @@
 <RelativeLayout
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="10dp">
 
     <ImageView
         android:layout_width="49dp"
@@ -19,7 +20,10 @@
         android:text="New Text"
         android:id="@+id/item_name"
         android:layout_toRightOf="@+id/item_thumb"
-        android:layout_alignTop="@+id/item_thumb"/>
+        android:layout_alignTop="@+id/item_thumb"
+        android:paddingLeft="5dp"
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -27,5 +31,9 @@
         android:text="New Text"
         android:id="@+id/item_short_descr"
         android:layout_toRightOf="@+id/item_thumb"
-        android:layout_below="@+id/item_name"/>
+        android:layout_below="@+id/item_name"
+        android:paddingLeft="5dp"
+        android:textSize="13dp"
+        android:textStyle="italic"
+        android:maxLines="2"/>
 </RelativeLayout>

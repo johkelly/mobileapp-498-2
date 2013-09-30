@@ -6,6 +6,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -39,8 +42,8 @@ public class InventoryFragment extends ListFragment {
         for(int i = 0; i < 25; i++){
             Equipment mock = new Equipment();
             mock.name = "mockname"+i;
-            mock.description = i+"lorem ipsum dolor sit ameter stuf stuff stuff stuff stuff";
-            mock.image_url = "";
+            mock.description = i+"lorem ipsum dolor sit ameter stuf stuff stuff stuff stuffstuf stuff stuff stuff stuffstuf stuff stuff stuff stuffstuf stuff stuff stuff stuff";
+            mock.image_url = "http://upload.wikimedia.org/wikipedia/en/a/af/Gray_square_illusion.png";
             mock.thumb_url = "";
             mocks.add(mock);
         }
@@ -54,5 +57,10 @@ public class InventoryFragment extends ListFragment {
         EquipmentAdapter adapter = new EquipmentAdapter(inflater.getContext(), R.layout.inventory_row, mockData());
         setListAdapter(adapter);
         return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id){
+        Toast.makeText(getActivity().getApplicationContext(), ((TextView)v.findViewById(R.id.item_name)).getText(), Toast.LENGTH_SHORT).show();
     }
 }

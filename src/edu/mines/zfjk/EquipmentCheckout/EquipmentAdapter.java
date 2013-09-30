@@ -59,7 +59,7 @@ public class EquipmentAdapter extends ArrayAdapter<Equipment>{
 //        holder.name.setText(itemJSON.getString("description").substring(0, 40));
 
         holder.name.setText(item.name);
-        holder.descr.setText(item.description.substring(0, 40));
+        holder.descr.setText(item.description);
         UrlImageViewHelper.setUrlDrawable(holder.thumbnail, item.image_url);
 
         return row;
