@@ -18,6 +18,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.os.AsyncTask;
+import android.os.StrictMode;
 import android.util.Log;
 // Data fetching modeled after http://www.vogella.com/articles/AndroidJSON/article.html#androidjson_read
 public class EquipmentModelController {
@@ -28,6 +29,11 @@ public class EquipmentModelController {
 	
 	public EquipmentModelController() 
 	{	
+		// this stuff is bad to have, hopefully main threads the fetch
+		StrictMode.ThreadPolicy policy = new StrictMode.
+			    ThreadPolicy.Builder().permitAll().build();
+			    StrictMode.setThreadPolicy(policy); 
+		
 		// This one is async
 		//new DownloadEquipmentTask().execute(AllObjectsEndpoint);
 		objects = new ArrayList<Equipment>();
