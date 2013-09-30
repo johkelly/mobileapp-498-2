@@ -34,28 +34,24 @@ public class InventoryFragment extends ListFragment {
     static int[] rowLayoutMapIds = new int[] {R.id.item_name, R.id.item_thumb, R.id.item_short_descr};
 
     //TODO: Remove
-    private JSONObject[] mockData(){
-        ArrayList<JSONObject> mocks = new ArrayList<JSONObject>();
+    private Equipment[] mockData(){
+        ArrayList<Equipment> mocks = new ArrayList<Equipment>();
         for(int i = 0; i < 25; i++){
-            JSONObject mock = new JSONObject();
-            try{
-                mock.put("name", "mockname"+i);
-                mock.put("desc", i+"lorem ipsum dolor sit amet");
-                mock.put("thumb_url", "fake");
-            }
-            catch (JSONException jse){
-                Log.d(logTag, String.valueOf(jse.getStackTrace()));
-            }
+            Equipment mock = new Equipment();
+            mock.name = "mockname"+i;
+            mock.description = i+"lorem ipsum dolor sit ameter stuf stuff stuff stuff stuff";
+            mock.image_url = "";
+            mock.thumb_url = "";
             mocks.add(mock);
         }
-        return mocks.toArray(new JSONObject[1]);
+        return mocks.toArray(new Equipment[1]);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
         // TODO: Make some fake data
-        EquipmentJSONAdapter adapter = new EquipmentJSONAdapter(inflater.getContext(), R.layout.inventory_row, mockData());
+        EquipmentAdapter adapter = new EquipmentAdapter(inflater.getContext(), R.layout.inventory_row, mockData());
         setListAdapter(adapter);
         return super.onCreateView(inflater, container, savedInstanceState);
     }

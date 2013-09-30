@@ -20,12 +20,12 @@ import org.json.JSONObject;
  * To change this template use File | Settings | File Templates.
  */
 // http://www.ezzylearning.com/tutorial.aspx?tid=1763429
-public class EquipmentJSONAdapter extends ArrayAdapter<JSONObject>{
+public class EquipmentAdapter extends ArrayAdapter<Equipment>{
     private Context context;
     private int layoutResId;
-    private JSONObject[] data = null;
+    private Equipment[] data = null;
 
-    public EquipmentJSONAdapter(Context context, int layoutResId, JSONObject[] data){
+    public EquipmentAdapter(Context context, int layoutResId, Equipment[] data){
         super(context, layoutResId, data);
         this.context = context;
         this.layoutResId = layoutResId;
@@ -53,19 +53,14 @@ public class EquipmentJSONAdapter extends ArrayAdapter<JSONObject>{
 
         row.setTag(holder);
 
-        JSONObject itemJSON = data[pos];
+        Equipment item = data[pos];
 
 //        holder.name.setText(itemJSON.getString("name"));
 //        holder.name.setText(itemJSON.getString("description").substring(0, 40));
 
-        try {
-            holder.name.setText(itemJSON.getString("name"));
-            holder.descr.setText(itemJSON.getString("desc"));
-            UrlImageViewHelper.setUrlDrawable(holder.thumbnail, "http://i.i.cbsi.com/cnwk.1d/i/tim/2011/08/24/2099cdc17f3f0a0e79135dc96b61ec9a54fe_android-menu-32_32x32.gif");
-        } catch (JSONException e) {
-            // TODO: Logcat
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
+        holder.name.setText(item.name);
+        holder.descr.setText(item.description.substring(0, 40));
+        UrlImageViewHelper.setUrlDrawable(holder.thumbnail, item.image_url);
 
         return row;
     }
