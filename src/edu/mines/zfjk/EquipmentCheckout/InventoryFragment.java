@@ -54,7 +54,8 @@ public class InventoryFragment extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
         // TODO: Make some fake data
-        EquipmentAdapter adapter = new EquipmentAdapter(inflater.getContext(), R.layout.inventory_row, mockData());
+        EquipmentModelController emc = new EquipmentModelController();
+        EquipmentAdapter adapter = new EquipmentAdapter(inflater.getContext(), R.layout.inventory_row, emc.getAllObjects().toArray(new Equipment[1]));
         setListAdapter(adapter);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
