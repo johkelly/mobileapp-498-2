@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 // Referenced http://wptrafficanalyzer.in/blog/a-listfragment-application-in-android/ for minimum functionality
 // of ListFragment
 
@@ -33,16 +35,20 @@ public class InventoryFragment extends ListFragment {
 
     //TODO: Remove
     private JSONObject[] mockData(){
-        JSONObject mock = new JSONObject();
-        try{
-            mock.put("name", "mockname");
-            mock.put("desc", "lorem ipsum dolor sit amet");
-            mock.put("thumb_url", "fake");
+        ArrayList<JSONObject> mocks = new ArrayList<JSONObject>();
+        for(int i = 0; i < 25; i++){
+            JSONObject mock = new JSONObject();
+            try{
+                mock.put("name", "mockname"+i);
+                mock.put("desc", i+"lorem ipsum dolor sit amet");
+                mock.put("thumb_url", "fake");
+            }
+            catch (JSONException jse){
+                Log.d(logTag, String.valueOf(jse.getStackTrace()));
+            }
+            mocks.add(mock);
         }
-        catch (JSONException jse){
-            Log.d(logTag, String.valueOf(jse.getStackTrace()));
-        }
-        return new JSONObject[] {mock};
+        return mocks.toArray(new JSONObject[1]);
     }
 
     @Override

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -60,11 +61,11 @@ public class EquipmentJSONAdapter extends ArrayAdapter<JSONObject>{
         try {
             holder.name.setText(itemJSON.getString("name"));
             holder.descr.setText(itemJSON.getString("desc"));
+            UrlImageViewHelper.setUrlDrawable(holder.thumbnail, "http://i.i.cbsi.com/cnwk.1d/i/tim/2011/08/24/2099cdc17f3f0a0e79135dc96b61ec9a54fe_android-menu-32_32x32.gif");
         } catch (JSONException e) {
             // TODO: Logcat
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-        holder.thumbnail.setBackgroundResource(R.drawable.ic_launcher);
 
         return row;
     }
