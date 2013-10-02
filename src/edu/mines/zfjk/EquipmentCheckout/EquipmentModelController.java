@@ -37,7 +37,7 @@ public class EquipmentModelController {
 
     public void fetchData(SharedPreferences prefs) {
         rawJSON = prefs.getString("data", null);
-        if(rawJSON == null){
+        if(rawJSON == null || rawJSON.isEmpty()){
             new DownloadEquipmentTask().execute(AllObjectsEndpoint);
             Log.d(logTag, "HTTP Call Out");
             return;
@@ -68,7 +68,7 @@ public class EquipmentModelController {
     }
 
     public void stashData(SharedPreferences prefs) {
-        if (rawJSON != null) {
+        if (rawJSON != null && !rawJSON.isEmpty()) {
             prefs.edit().putString("data", rawJSON).commit();
         }
     }

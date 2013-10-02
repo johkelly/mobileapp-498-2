@@ -10,6 +10,13 @@ import android.os.Bundle;
  * demo, under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache v2 License</a>. The demo uses the
  * Fragment Support APIs, however, this app is targeted at new enough Android devices that "standard" Fragment APIs
  * can be used instead.
+ *
+ * Mobile Development Application 2, Intermediate Submission
+ * Zachary Fleischman, John Kelly
+ * At present, the app can fetch a (currently hard-coded) JSON resource from the web and then parse it into a ListFragment
+ * which will act as one part of a master-detail layout (detail fragment not implemented yet). It also caches the
+ * JSON string locally in shared preferences (this should be something more robust, but it's a low priority for the
+ * project and caching at all is better than making a web call on every onCreate()).
  */
 public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
