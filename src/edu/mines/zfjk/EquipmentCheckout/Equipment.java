@@ -9,6 +9,5 @@ package edu.mines.zfjk.EquipmentCheckout;
 public class Equipment {
     public String name;
     public String description;
-    public String thumb_url;
     public String image_url;
 }

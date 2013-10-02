@@ -9,8 +9,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
-import org.json.JSONException;
-import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -23,18 +26,35 @@ import org.json.JSONObject;
 public class EquipmentAdapter extends ArrayAdapter<Equipment>{
     private Context context;
     private int layoutResId;
-    private Equipment[] data = null;
+    private List<Equipment> data;
 
     public EquipmentAdapter(Context context, int layoutResId, Equipment[] data){
         super(context, layoutResId, data);
         this.context = context;
         this.layoutResId = layoutResId;
-        this.data = data;
+        this.data = Arrays.asList(data);
+    }
+
+    public EquipmentAdapter(Context context, int layoutResId){
+        super(context, layoutResId);
+        this.context = context;
+        this.layoutResId = layoutResId;
+        data = new ArrayList<Equipment>();
+    }
+
+    public void addEquipment(Equipment e){
+        data.add(e);
+        notifyDataSetChanged();
+    }
+
+    public void addManyEquipment(Collection<Equipment> es){
+        data.addAll(es);
+        notifyDataSetChanged();
     }
 
     @Override
     public int getCount(){
-        return data.length;
+        return data.size();
     }
 
     @Override
@@ -53,10 +73,7 @@ public class EquipmentAdapter extends ArrayAdapter<Equipment>{
 
         row.setTag(holder);
 
-        Equipment item = data[pos];
-
-//        holder.name.setText(itemJSON.getString("name"));
-//        holder.name.setText(itemJSON.getString("description").substring(0, 40));
+        Equipment item = data.get(pos);
 
         holder.name.setText(item.name);
         holder.descr.setText(item.description);
