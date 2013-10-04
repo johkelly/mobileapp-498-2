@@ -58,8 +58,18 @@ public class EquipmentModelController {
 
                 Equipment e = new Equipment();
                 e.name = jsonObject.getString("name");
-                e.description = "Element: " + jsonObject.getString("element") + "\nRace: " + jsonObject.getString("race");
-                objects.add(e);
+                e.type = jsonObject.getString("type");
+                e.image_url = jsonObject.getString("image_url");
+                e.description = jsonObject.getString("description");
+                
+                Rental r = new Rental();
+                JSONObject jsonRental = jsonObject.getJSONObject("rental");
+                r.checkout_date = jsonRental.getString("checkout_date");
+                r.checkout_due = jsonRental.getString("checkout_due");
+                r.checkout_status = jsonRental.getBoolean("checkout_status");
+                r.renter = jsonRental.getString("renter");
+                
+                e.rental = r;
             }
         } catch (Exception e) {
             Log.e(EquipmentModelController.class.getName(), e.getStackTrace().toString());

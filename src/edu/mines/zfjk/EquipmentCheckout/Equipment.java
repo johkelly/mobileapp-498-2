@@ -8,6 +8,8 @@ package edu.mines.zfjk.EquipmentCheckout;
  */
 public class Equipment {
     public String name;
-    public String description;
+    public String type;
     public String image_url;
+    public Rental rental;
+    public String description;
 }
