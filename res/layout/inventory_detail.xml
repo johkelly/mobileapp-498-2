@@ -1,15 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/imageView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bluh Bluh"
+        android:text="@string/name_label"
+        android:id="@+id/detail_name_label"
+        android:layout_toRightOf="@+id/imageView"
+        android:layout_alignTop="@+id/imageView"
+        android:paddingTop="20dp"
+        android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/detail_name"
-        android:layout_gravity="center"
-        android:keepScreenOn="false"/>
-</LinearLayout>
+        android:layout_toRightOf="@+id/detail_name_label"
+        android:layout_marginLeft="20dp"
+        android:text="{Placeholder}"
+        android:layout_alignBaseline="@+id/detail_name_label" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/type_label"
+        android:id="@+id/detail_type_label"
+        android:layout_alignLeft="@+id/detail_name_label"
+        android:layout_below="@+id/detail_name_label"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/detail_type"
+        android:text="{Placeholder}"
+        android:layout_alignLeft="@+id/detail_name"
+        android:layout_alignBaseline="@+id/detail_type_label" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/description_label"
+        android:id="@+id/detail_description_label"
+        android:layout_alignLeft="@+id/imageView"
+        android:layout_below="@+id/imageView"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp" />
+
+    <view
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        class="edu.mines.zfjk.EquipmentCheckout.CheckoutStatusView"
+        android:id="@+id/view"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true" />
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/detail_description_scroll"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/detail_description_label"
+        android:layout_alignRight="@+id/view"
+        android:layout_above="@+id/view"
+        android:layout_margin="20dp">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="..."
+            android:id="@+id/detail_description"
+            android:layout_alignLeft="@+id/imageView"
+            android:layout_below="@+id/detail_description_label"
+            android:layout_alignRight="@+id/view"
+            android:layout_above="@+id/view" />
+    </ScrollView>
+
+</RelativeLayout>
