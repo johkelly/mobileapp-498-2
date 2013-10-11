@@ -24,7 +24,7 @@ public class EquipmentModelController {
 
     private static final String logTag = "edu.mines.zfjk.EquipmentCheckout.EquipmentModelController";
 
-    private static String AllObjectsEndpoint = "https://api.mongolab.com/api/1/databases/ponyrent/collections/ponies?apiKey=rXruD8i0AHovrBYVfc30MiuVKCPrmmqh";
+    private static String AllObjectsEndpoint = "https://api.mongolab.com/api/1/databases/ponyrent/collections/books?apiKey=rXruD8i0AHovrBYVfc30MiuVKCPrmmqh";
 
     private ArrayList<Equipment> objects;
     private EquipmentAdapter adapter;
@@ -59,7 +59,7 @@ public class EquipmentModelController {
                 Equipment e = new Equipment();
                 e.name = jsonObject.getString("name");
                 e.type = jsonObject.getString("type");
-                e.image_url = jsonObject.getString("image_url");
+                e.image_url = jsonObject.getString("image");
                 e.description = jsonObject.getString("description");
                 
                 Rental r = new Rental();
@@ -70,6 +70,8 @@ public class EquipmentModelController {
                 r.renter = jsonRental.getString("renter");
                 
                 e.rental = r;
+
+                objects.add(e);
             }
         } catch (Exception e) {
             Log.e(EquipmentModelController.class.getName(), e.getStackTrace().toString());
@@ -117,6 +119,7 @@ public class EquipmentModelController {
     private class DownloadEquipmentTask extends AsyncTask<String, Integer, String> {
 
         protected String doInBackground(String... urls) {
+            Log.d(logTag, "fetching from " + urls[0]);
             return readURL(urls[0]);
         }
 
