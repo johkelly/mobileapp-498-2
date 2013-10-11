@@ -14,6 +14,8 @@ import android.view.ViewGroup;
  * To change this template use File | Settings | File Templates.
  */
 public class DetailFragment extends Fragment {
+    Equipment e;
+
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);

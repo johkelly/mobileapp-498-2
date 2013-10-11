@@ -38,6 +38,9 @@ public class InventoryFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id){
         Toast.makeText(getActivity().getApplicationContext(), ((TextView)v.findViewById(R.id.item_name)).getText(), Toast.LENGTH_SHORT).show();
+        DetailFragment dfrag = new DetailFragment();
+        dfrag.e = emc.getAllObjects().get(position);
+        getFragmentManager().beginTransaction().add(R.id.detail_fragment_container, dfrag).commit();
     }
 
     @Override
