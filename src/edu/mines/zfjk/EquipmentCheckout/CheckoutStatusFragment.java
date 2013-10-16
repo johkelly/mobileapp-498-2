@@ -7,6 +7,8 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,6 +17,8 @@ import android.view.ViewGroup;
  * Time: 3:44 PM
  */
 public class CheckoutStatusFragment extends Fragment {
+	
+	public Rental rental;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -33,6 +37,28 @@ public class CheckoutStatusFragment extends Fragment {
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.checkout_status, container, false);
+    }
+    
+    public void update() {
+    	TextView userLabel = (TextView) getView().findViewById(R.id.checkout_user);
+    	userLabel.setText(rental.renter);
+    	
+    	TextView checkedOutLabel = (TextView) getView().findViewById(R.id.checkout_out);
+    	checkedOutLabel.setText(rental.checkout_date);
+    	
+    	TextView checkedOutDue = (TextView) getView().findViewById(R.id.checkout_due);
+    	checkedOutDue.setText(rental.checkout_due);
+    	
+    	RelativeLayout inLayout = (RelativeLayout) getView().findViewById(R.id.in_layout);
+    	RelativeLayout outLayout = (RelativeLayout) getView().findViewById(R.id.out_layout);
+    	
+    	if (rental.is_checked_out) {
+    		inLayout.setVisibility(View.INVISIBLE);
+    		outLayout.setVisibility(View.VISIBLE);
+    	} else {
+    		inLayout.setVisibility(View.VISIBLE);
+    		outLayout.setVisibility(View.INVISIBLE);
+    	}
     }
 
 }

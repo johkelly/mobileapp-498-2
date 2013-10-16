@@ -66,7 +66,7 @@ public class EquipmentModelController {
                 JSONObject jsonRental = jsonObject.getJSONObject("rental");
                 r.checkout_date = jsonRental.getString("checkout_date");
                 r.checkout_due = jsonRental.getString("checkout_due");
-                r.checkout_status = jsonRental.getBoolean("checkout_status");
+                r.is_checked_out = jsonRental.getBoolean("checkout_status");
                 r.renter = jsonRental.getString("renter");
                 
                 e.rental = r;
