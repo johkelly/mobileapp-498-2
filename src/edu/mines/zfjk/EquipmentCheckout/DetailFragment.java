@@ -1,11 +1,14 @@
 package edu.mines.zfjk.EquipmentCheckout;
 
+import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
+
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -56,12 +59,20 @@ public class DetailFragment extends Fragment {
         if(e == null){
             throw new IllegalStateException("DetailFragment not populated with an Equipment object");
         }
-        TextView nameView = (TextView) getView().findViewById(R.id.detail_name);
-        nameView.setText(e.name);
+        update();
     }
 
     public void update() {
         TextView nameView = (TextView) getView().findViewById(R.id.detail_name);
         nameView.setText(e.name);
+        
+        TextView detailView = (TextView) getView().findViewById(R.id.detail_type);
+        detailView.setText(e.type);
+        
+        TextView descriptionView = (TextView) getView().findViewById(R.id.detail_description);
+        descriptionView.setText(e.description);
+        
+        ImageView imageView = (ImageView) getView().findViewById(R.id.imageView);
+        UrlImageViewHelper.setUrlDrawable(imageView, e.image_url);
     }
 }
