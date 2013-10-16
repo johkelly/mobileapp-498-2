@@ -7,4 +7,9 @@
     <string name="checkout_label">Checkout Status:</string>
     <string name="out_date_label">Checked Out:</string>
     <string name="in_date_label">Due Back:</string>
+    <string name="checkout_status_label">Checkout Status</string>
+    <string name="checked_in">This item is checked in.</string>
+    <string name="checkout_user_label">Checked out by:</string>
+    <string name="checkout_out_date_label">Checked out:</string>
+    <string name="checkout_due_date_label">Due back:</string>
 </resources>

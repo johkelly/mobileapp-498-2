@@ -48,44 +48,47 @@
         android:layout_alignLeft="@+id/detail_name"
         android:layout_alignBaseline="@+id/detail_type_label" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/description_label"
-        android:id="@+id/detail_description_label"
-        android:layout_alignLeft="@+id/imageView"
-        android:layout_below="@+id/imageView"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp" />
-
-    <view
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        class="edu.mines.zfjk.EquipmentCheckout.CheckoutStatusView"
-        android:id="@+id/view"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true" />
-
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/detail_description_scroll"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/detail_description_label"
-        android:layout_alignRight="@+id/view"
-        android:layout_above="@+id/view"
-        android:layout_margin="20dp">
-
-        <TextView
+    <RelativeLayout
+            android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:text="..."
-            android:id="@+id/detail_description"
-            android:layout_alignLeft="@+id/imageView"
-            android:layout_below="@+id/detail_description_label"
-            android:layout_alignRight="@+id/view"
-            android:layout_above="@+id/view" />
-    </ScrollView>
+            android:layout_height="fill_parent" android:layout_below="@+id/imageView">
+        <fragment android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:name="edu.mines.zfjk.EquipmentCheckout.CheckoutStatusFragment" android:id="@+id/fragment"
+                  android:layout_weight="1"
+                  android:layout_alignParentLeft="true" android:layout_alignParentTop="true"/>
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent" android:layout_weight="1"
+                android:layout_alignParentLeft="true" android:layout_below="@+id/fragment">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/description_label"
+                android:id="@+id/detail_description_label"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp" android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"/>
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/detail_description_scroll"
+                android:layout_alignParentLeft="false"
+                android:layout_below="@+id/detail_description_label"
+                android:layout_margin="20dp" android:layout_marginLeft="15dp" android:layout_alignParentTop="false"
+                android:layout_marginTop="15dp" android:layout_alignLeft="@+id/detail_description_label">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="..."
+                    android:id="@+id/detail_description"
+                    android:layout_alignLeft="@+id/imageView"
+                    android:layout_below="@+id/detail_description_label"
+                    android:layout_alignRight="@+id/checkout_status"
+                    android:layout_above="@+id/checkout_status" />
+            </ScrollView>
+        </RelativeLayout>
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/checkout_status_label"
+            android:id="@+id/checkout_status_label" android:layout_alignParentLeft="true" android:layout_alignParentTop="true"
+            android:visibility="gone"/>
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" android:layout_margin="20dp"
+            android:layout_below="@+id/checkout_status_label" android:id="@+id/in_layout"
+            android:visibility="gone">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/checked_in"
+                android:id="@+id/textView" android:layout_alignParentLeft="true" android:layout_alignParentTop="true"
+                android:visibility="visible"/>
+    </RelativeLayout>
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/out_layout" android:visibility="visible"
+            android:layout_margin="20dp" android:layout_below="@+id/checkout_status_label">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/checkout_user_label"
+                android:id="@+id/user_label" android:singleLine="false"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="{UNINITIALIZED}"
+                android:id="@+id/checkout_user"
+                android:layout_alignLeft="@+id/user_label" android:layout_below="@+id/user_label"
+                android:layout_marginLeft="20dp" android:layout_marginTop="5dp"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/checkout_out_date_label"
+                android:id="@+id/checkout_out_label" android:layout_alignLeft="@+id/user_label"
+                android:layout_below="@+id/checkout_user" android:layout_marginTop="10dp"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="{UNINITIALIZED}"
+                android:id="@+id/checkout_out" android:layout_alignLeft="@+id/user_label"
+                android:layout_below="@+id/checkout_out_label" android:layout_marginTop="5dp" android:layout_marginLeft="20dp"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/checkout_due_date_label"
+                android:id="@+id/checkout_due_label"
+                android:layout_toRightOf="@+id/dummy_alignment_layout" android:layout_alignTop="@+id/checkout_out_label"
+                android:singleLine="false" android:phoneNumber="false" android:password="false"/>
+        <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp" android:layout_centerHorizontal="true"
+                android:layout_below="@+id/checkout_out" android:id="@+id/dummy_alignment_layout">
+        </FrameLayout>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="{UNINITIALIZED}"
+                android:id="@+id/checkout_due" android:layout_alignLeft="@+id/checkout_due_label"
+                android:layout_below="@+id/checkout_out_label" android:layout_marginLeft="10dp" android:layout_marginTop="5dp"/>
+    </RelativeLayout>
+</RelativeLayout>
