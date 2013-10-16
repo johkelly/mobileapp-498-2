@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 /**
  * Created with IntelliJ IDEA.
  * User: jack
@@ -16,6 +18,8 @@ import android.widget.TextView;
  */
 public class DetailFragment extends Fragment {
     Equipment e; // package local
+
+    ArrayList<Equipment> equipment;
 
     // http://stackoverflow.com/questions/14083950/duplicate-id-tag-null-or-parent-id-with-another-fragment-for-com-google-androi
     private static View view;
@@ -63,5 +67,10 @@ public class DetailFragment extends Fragment {
     public void update() {
         TextView nameView = (TextView) getView().findViewById(R.id.detail_name);
         nameView.setText(e.name);
+    }
+
+    public void updateDetailsForEquipment(int position){
+        Equipment e = equipment.get(position);
+        // TODO
     }
 }

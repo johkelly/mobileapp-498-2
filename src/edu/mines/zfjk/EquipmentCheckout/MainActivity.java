@@ -41,6 +41,9 @@ public class MainActivity extends Activity implements DetailFragmentDispatcher {
         // Single pane layout with multiple activities
         else {
             // TODO
+            DetailFragment detailFrag = new DetailFragment();
+            detailFrag.e = e;
+            fm.beginTransaction().replace(R.id.solo_inventory_fragment_container, detailFrag).addToBackStack(null).commit();
         }
     }
 }
