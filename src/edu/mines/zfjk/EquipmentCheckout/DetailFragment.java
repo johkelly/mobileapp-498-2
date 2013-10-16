@@ -81,6 +81,7 @@ public class DetailFragment extends Fragment {
         
         CheckoutStatusFragment checkout = (CheckoutStatusFragment) getFragmentManager().findFragmentById(R.id.checkout_status_fragment);
         checkout.rental = e.rental;
+        checkout.update();
     }
 
     public void updateDetailsForEquipment(int position){

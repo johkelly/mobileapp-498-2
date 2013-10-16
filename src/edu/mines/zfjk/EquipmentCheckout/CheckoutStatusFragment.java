@@ -42,10 +42,6 @@ public class CheckoutStatusFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState){
         // TODO: Upgrade to using newInstance() static method and bundle and parcelable
-        if(rental == null){
-            throw new IllegalStateException("CheckoutFragment not populated with an Rental object");
-        }
-        update();
     }
     
     public void update() {

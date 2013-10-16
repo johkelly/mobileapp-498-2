@@ -56,7 +56,6 @@ public class InventoryFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id){
-        Toast.makeText(getActivity().getApplicationContext(), ((TextView) v.findViewById(R.id.item_name)).getText(), Toast.LENGTH_SHORT).show();
         Equipment modelTarget = emc.getAllObjects().get(position);
         dispatcher.displayDetailsFor(modelTarget);
     }
