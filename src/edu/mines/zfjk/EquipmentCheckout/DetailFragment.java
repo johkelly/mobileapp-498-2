@@ -2,6 +2,7 @@ package edu.mines.zfjk.EquipmentCheckout;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +13,12 @@ import android.widget.TextView;
  * User: jack
  * Date: 9/29/13
  * Time: 6:38 PM
- * To change this template use File | Settings | File Templates.
  */
 public class DetailFragment extends Fragment {
     Equipment e; // package local
+
+    // http://stackoverflow.com/questions/14083950/duplicate-id-tag-null-or-parent-id-with-another-fragment-for-com-google-androi
+    private static View view;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -32,8 +35,19 @@ public class DetailFragment extends Fragment {
             // TODO
         }
 
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.inventory_detail, container, false);
+        // http://stackoverflow.com/questions/14083950/duplicate-id-tag-null-or-parent-id-with-another-fragment-for-com-google-androi
+        if(view != null){
+            ViewGroup parent = (ViewGroup) view.getParent();
+            if(parent != null){
+                parent.removeView(view);
+            }
+        }
+        try {
+            view = inflater.inflate(R.layout.inventory_detail, container, false);
+        } catch (InflateException ie){
+            // details are already there?
+        }
+        return view;
     }
 
     @Override
