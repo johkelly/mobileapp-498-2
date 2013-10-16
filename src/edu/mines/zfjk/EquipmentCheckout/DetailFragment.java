@@ -78,6 +78,9 @@ public class DetailFragment extends Fragment {
         
         ImageView imageView = (ImageView) getView().findViewById(R.id.imageView);
         UrlImageViewHelper.setUrlDrawable(imageView, e.image_url);
+        
+        CheckoutStatusFragment checkout = (CheckoutStatusFragment) getFragmentManager().findFragmentById(R.id.checkout_status_fragment);
+        checkout.rental = e.rental;
     }
 
     public void updateDetailsForEquipment(int position){
