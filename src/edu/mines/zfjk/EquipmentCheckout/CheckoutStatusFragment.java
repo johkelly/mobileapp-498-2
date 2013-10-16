@@ -39,6 +39,15 @@ public class CheckoutStatusFragment extends Fragment {
         return inflater.inflate(R.layout.checkout_status, container, false);
     }
     
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState){
+        // TODO: Upgrade to using newInstance() static method and bundle and parcelable
+        if(rental == null){
+            throw new IllegalStateException("CheckoutFragment not populated with an Rental object");
+        }
+        update();
+    }
+    
     public void update() {
     	TextView userLabel = (TextView) getView().findViewById(R.id.checkout_user);
     	userLabel.setText(rental.renter);

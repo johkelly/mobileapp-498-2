@@ -19,6 +19,7 @@ public final class R {
         public static final int checkout_out=0x7f050007;
         public static final int checkout_out_label=0x7f050006;
         public static final int checkout_status=0x7f050014;
+        public static final int checkout_status_fragment=0x7f050010;
         public static final int checkout_status_label=0x7f050000;
         public static final int checkout_user=0x7f050005;
         public static final int detail_description=0x7f050013;
@@ -30,7 +31,6 @@ public final class R {
         public static final int detail_type=0x7f05000f;
         public static final int detail_type_label=0x7f05000e;
         public static final int dummy_alignment_layout=0x7f050009;
-        public static final int fragment=0x7f050010;
         public static final int imageView=0x7f05000b;
         public static final int in_layout=0x7f050001;
         public static final int inventory_fragment=0x7f050016;
