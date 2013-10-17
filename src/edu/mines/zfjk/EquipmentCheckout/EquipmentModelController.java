@@ -18,21 +18,59 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 
 // Data fetching modeled after http://www.vogella.com/articles/AndroidJSON/article.html#androidjson_read
-public class EquipmentModelController {
+public class EquipmentModelController implements MainActivity.refreshListener {
+
+    public static interface EquipmentModelListener {
+        public void modelUpdate(List<Equipment> newModel);
+    }
 
     private static final String logTag = "edu.mines.zfjk.EquipmentCheckout.EquipmentModelController";
 
     private static String AllObjectsEndpoint = "https://api.mongolab.com/api/1/databases/ponyrent/collections/books?apiKey=rXruD8i0AHovrBYVfc30MiuVKCPrmmqh";
 
-    private ArrayList<Equipment> objects;
-    private EquipmentAdapter adapter;
+    private List<Equipment> objects;
+    // private EquipmentAdapter adapter;
+    private List<EquipmentModelListener> listeners;
     private String rawJSON;
 
-    public EquipmentModelController(EquipmentAdapter ea) {
-        adapter = ea;
+    public EquipmentModelController() {
+        // adapter = ea;
+        listeners = new ArrayList<EquipmentModelListener>();
         objects = new ArrayList<Equipment>();
+    }
+
+    @Override
+    public void refreshSoft() {
+        notifyListeners();
+    }
+
+    @Override
+    public void refreshHard() {
+        objects.clear();
+        fetchData();
+        notifyListeners();
+    }
+
+    public void registerListener(EquipmentModelListener eml){
+        listeners.add(eml);
+    }
+
+    public void removeListener(EquipmentModelListener eml){
+        listeners.remove(eml);
+    }
+
+    private void notifyListeners() {
+        for(EquipmentModelListener eml : listeners){
+            eml.modelUpdate(objects);
+        }
+    }
+
+    public void fetchData(){
+        new DownloadEquipmentTask().execute(AllObjectsEndpoint);
+        Log.d(logTag, "HTTP Call Out");
     }
 
     public void fetchData(SharedPreferences prefs) {
@@ -43,7 +81,8 @@ public class EquipmentModelController {
             return;
         } else{
             parseRawJSON(rawJSON);
-            adapter.addManyEquipment(objects);
+            notifyListeners();
+            //adapter.addManyEquipment(objects);
         }
         Log.d(logTag, "Retrieved from SharedPrefs");
     }
@@ -112,7 +151,7 @@ public class EquipmentModelController {
         return builder.toString();
     }
 
-    public ArrayList<Equipment> getAllObjects() {
+    public List<Equipment> getAllObjects() {
         return objects;
     }
 
@@ -126,7 +165,8 @@ public class EquipmentModelController {
         protected void onPostExecute(String result) {
             rawJSON = result;
             parseRawJSON(rawJSON);
-            adapter.addManyEquipment(objects);
+            notifyListeners();
+            //adapter.addManyEquipment(objects);
         }
     }
 

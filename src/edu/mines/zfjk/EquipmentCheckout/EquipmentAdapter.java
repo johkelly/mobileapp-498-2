@@ -42,14 +42,8 @@ public class EquipmentAdapter extends ArrayAdapter<Equipment>{
         data = new ArrayList<Equipment>();
     }
 
-    public void addEquipment(Equipment e){
-        data.add(e);
-        notifyDataSetChanged();
-    }
-
-    public void addManyEquipment(Collection<Equipment> es){
-        data.addAll(es);
-        notifyDataSetChanged();
+    public void bindToList(List<Equipment> newData){
+        data = newData;
     }
 
     @Override
@@ -76,7 +70,7 @@ public class EquipmentAdapter extends ArrayAdapter<Equipment>{
         Equipment item = data.get(pos);
 
         holder.name.setText(item.name);
-        holder.descr.setText(item.description);
+        holder.descr.setText(item.type);
         UrlImageViewHelper.setUrlDrawable(holder.thumbnail, item.image_url);
 
         return row;

@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,12 +20,11 @@ import java.util.ArrayList;
  * Date: 9/29/13
  * Time: 6:38 PM
  */
-public class DetailFragment extends Fragment {
-    Equipment e; // package local
+public class DetailFragment extends Fragment implements EquipmentModelController.EquipmentModelListener{
 
-    ArrayList<Equipment> equipment;
+    private List<Equipment> equipment;
 
-    // http://stackoverflow.com/questions/14083950/duplicate-id-tag-null-or-parent-id-with-another-fragment-for-com-google-androi
+    // http://stackoverflow.com/questions/14083950/duplicate-id-tag-null-or-parent-id-with-another-fragment-for-com-google-android
     private static View view;
 
     @Override
@@ -60,13 +60,21 @@ public class DetailFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState){
         // TODO: Upgrade to using newInstance() static method and bundle and parcelable
-        if(e == null){
-            throw new IllegalStateException("DetailFragment not populated with an Equipment object");
+        if(savedInstanceState != null){
+            int pos = savedInstanceState.getInt("position");
+            // 0 is an error indicator: could not find position key
+            if(pos == 0){
+                return ;
+            }
+            // decrement position by 1 to get an index
+            pos -= 1;
+            showEquipmentDetailsFor(pos);
         }
-        update();
     }
 
-    public void update() {
+    public void showEquipmentDetailsFor(int pos) {
+        Equipment e = equipment.get(pos);
+
         TextView nameView = (TextView) getView().findViewById(R.id.detail_name);
         nameView.setText(e.name);
         
@@ -84,8 +92,8 @@ public class DetailFragment extends Fragment {
         checkout.update();
     }
 
-    public void updateDetailsForEquipment(int position){
-        Equipment e = equipment.get(position);
-        // TODO
+    @Override
+    public void modelUpdate(List<Equipment> newModel) {
+        equipment = newModel;
     }
 }
