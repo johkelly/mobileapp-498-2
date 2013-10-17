@@ -3,7 +3,6 @@ package edu.mines.zfjk.EquipmentCheckout;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.os.Bundle;
-import android.view.View;
 
 /**
  * The structure of this activity's layout and its handling of multiple screen sizes with regard to fragments is
@@ -21,13 +20,16 @@ public class MainActivity extends Activity implements DetailFragmentDispatcher {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.inventory_listing);
+        if (findViewById(R.id.solo_fragment_container) != null) {
+            getFragmentManager().beginTransaction().add(R.id.solo_fragment_container, new InventoryFragment()).commit();
+        }
     }
 
     @Override
     public void displayDetailsFor(Equipment e) {
         FragmentManager fm = getFragmentManager();
         // Multi pane layout with multiple fragments in layout
-        if (findViewById(R.id.detail_fragment_container) != null) {
+        if (findViewById(R.id.solo_fragment_container) == null) {
             DetailFragment details = (DetailFragment) fm.findFragmentByTag("details");
             if (details == null) {
                 details = new DetailFragment();
@@ -43,7 +45,7 @@ public class MainActivity extends Activity implements DetailFragmentDispatcher {
             // TODO
             DetailFragment detailFrag = new DetailFragment();
             detailFrag.e = e;
-            fm.beginTransaction().replace(R.id.solo_inventory_fragment_container, detailFrag).addToBackStack(null).commit();
+            fm.beginTransaction().replace(R.id.solo_fragment_container, detailFrag).addToBackStack(null).commit();
         }
     }
 }
