@@ -32,6 +32,11 @@ public class InventoryFragment extends ListFragment implements EquipmentModelLis
     }
 
     // http://developer.android.com/training/basics/fragments/communicating.html
+
+    /**
+     * Callback for when this fragment attaches to an activity. Here we capture the parent as a dispatcher.
+     * @param activity parent activity being attached to
+     */
     @Override
     public void onAttach(Activity activity){
         super.onAttach(activity);
@@ -43,6 +48,13 @@ public class InventoryFragment extends ListFragment implements EquipmentModelLis
         }
     }
 
+    /**
+     * Callback for when this fragment creates its views/layouts.
+     * @param inflater utility object
+     * @param container where this fragment is going
+     * @param savedInstanceState unused
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
@@ -52,7 +64,13 @@ public class InventoryFragment extends ListFragment implements EquipmentModelLis
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
-
+    /**
+     * Callback for when an item in the listing was clicked
+     * @param l Containing ListView
+     * @param v Row view for the item
+     * @param position Index of the item
+     * @param id unused
+     */
     @Override
     public void onListItemClick(ListView l, View v, int position, long id){
         // Equipment modelTarget = emc.getAllObjects().get(position);
@@ -62,6 +80,9 @@ public class InventoryFragment extends ListFragment implements EquipmentModelLis
         dispatcher.displayDetailsFor(position);
     }
 
+    /**
+     * Callback for resuming this fragment.
+     */
     @Override
     public void onResume() {
         super.onResume();
@@ -70,6 +91,10 @@ public class InventoryFragment extends ListFragment implements EquipmentModelLis
         }
     }
 
+    /**
+     * Callback for an EquipmentModel to inform this object that it needs to update its data reference.
+     * @param newModel Reference to the new List of data objects
+     */
     @Override
     public void modelUpdate(List<Equipment> newModel) {
         adapter.bindToList(newModel);

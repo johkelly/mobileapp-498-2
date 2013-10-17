@@ -21,17 +21,35 @@ import android.view.MenuItem;
  * <p/>
  * Mobile Development Application 2, Intermediate Submission
  * Zachary Fleischman, John Kelly
- * WIP
+ *
+ * We were forced to compromise on the fragment functionality of the app because managing multiple layouts, across
+ * multiple screen sizes, across multiple orientations proved to be too complex. We believe that the landscape-only
+ * layout provided is a reasonable compromise of functionality and visual appeal that still satisfies the requirement
+ * to use fragments.
+ *
+ * We otherwise believe we satisfied our App Proposal by including a Master/Detail multi-pane/single-pane layout via
+ * fragments, an asynchronous web call off the main thread, local persistence of fetched data, and local persistence
+ * of selected item state.
+ *
+ * Outside tutorials/code resources are noted near their relevant classes/functions, where appropriate.
  */
 public class MainActivity extends Activity implements DetailsFragmentDispatcher {
 
-    EquipmentModelController emc;
-
+    /**
+     * For objects wishing to respond to the Refresh action bar button.
+     */
     public static interface refreshListener {
         public void refreshSoft();
         public void refreshHard();
     }
 
+    EquipmentModelController emc;
+
+    /**
+     * Callback for Activity creation
+     * @param savedInstanceState Not used
+     */
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if(emc == null){
@@ -48,6 +66,11 @@ public class MainActivity extends Activity implements DetailsFragmentDispatcher 
         emc.fetchData(getPreferences(MODE_PRIVATE));
     }
 
+    /**
+     * Callback for menu (ActionBar) creation.
+     * @param menu Menu object to be populated
+     * @return true to display the menu
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater mi = getMenuInflater();
@@ -55,6 +78,11 @@ public class MainActivity extends Activity implements DetailsFragmentDispatcher 
         return true;
     }
 
+    /**
+     * Menu item selected callback.
+     * @param item MenuItem selected
+     * @return true to consume the selection event
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
@@ -67,20 +95,10 @@ public class MainActivity extends Activity implements DetailsFragmentDispatcher 
         return true;
     }
 
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        // TODO Auto-generated method stub
-
-        super.onConfigurationChanged(newConfig);
-
-        if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            Log.d("DERP", "Hi mom. portrait");
-        } else if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            Log.d("DERP", "landscape");
-        }
-
-    }
-
+    /**
+     * Lifecycle callback for resuming activity.
+     * Restore selection and model data here.
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -93,12 +111,20 @@ public class MainActivity extends Activity implements DetailsFragmentDispatcher 
         }
     }
 
+    /**
+     * Lifecycle callback for pausing activity.
+     * Stash the model data here.
+     */
     @Override
     protected void onPause() {
         super.onPause();
         emc.stashData(getPreferences(Context.MODE_PRIVATE));
     }
 
+    /**
+     * Dispatch a DetailsFragment according to the current layout
+     * @param pos index of the Equipment object to display details for
+     */
     @Override
     public void displayDetailsFor(int pos) {
         if (emc.getAllObjects().size() <= pos) return;

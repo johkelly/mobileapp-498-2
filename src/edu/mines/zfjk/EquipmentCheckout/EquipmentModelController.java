@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 // Data fetching modeled after http://www.vogella.com/articles/AndroidJSON/article.html#androidjson_read
@@ -42,11 +43,17 @@ public class EquipmentModelController implements MainActivity.refreshListener {
         objects = new ArrayList<Equipment>();
     }
 
+    /**
+     * Let listeners know they should rebind the data if possible
+     */
     @Override
     public void refreshSoft() {
         notifyListeners();
     }
 
+    /**
+     * fetch new data and inform the listeners
+     */
     @Override
     public void refreshHard() {
         objects.clear();
@@ -68,11 +75,18 @@ public class EquipmentModelController implements MainActivity.refreshListener {
         }
     }
 
+    /**
+     * Hard fetch via network call.
+     */
     public void fetchData(){
         new DownloadEquipmentTask().execute(AllObjectsEndpoint);
         Log.d(logTag, "HTTP Call Out");
     }
 
+    /**
+     * Fetch from sharedprefs, if possible, network if not.
+     * @param prefs SharedPreferences to fetch cached data from.
+     */
     public void fetchData(SharedPreferences prefs) {
         rawJSON = prefs.getString("data", null);
         if(rawJSON == null || rawJSON.isEmpty()){
@@ -87,6 +101,10 @@ public class EquipmentModelController implements MainActivity.refreshListener {
         Log.d(logTag, "Retrieved from SharedPrefs");
     }
 
+    /**
+     * Parse a JSON object into an Equipment Object
+     * @param rawJSON JSON string to parse
+     */
     private void parseRawJSON(String rawJSON) {
         try {
             JSONArray jsonArray = new JSONArray(rawJSON);
@@ -114,17 +132,26 @@ public class EquipmentModelController implements MainActivity.refreshListener {
             }
 
         } catch (Exception e) {
-            Log.e(EquipmentModelController.class.getName(), e.getStackTrace().toString());
+            Log.e(EquipmentModelController.class.getName(), Arrays.toString(e.getStackTrace()));
             e.printStackTrace();
         }
     }
 
+    /**
+     * Cache the data.
+     * @param prefs SharedPreferences to cache the data in.
+     */
     public void stashData(SharedPreferences prefs) {
         if (rawJSON != null && !rawJSON.isEmpty()) {
             prefs.edit().putString("data", rawJSON).commit();
         }
     }
 
+    /**
+     * Given a URL, retrieve a string from the network.
+     * @param url URL to request a string from
+     * @return Received string
+     */
     private String readURL(String url) {
         StringBuilder builder = new StringBuilder();
         HttpClient client = new DefaultHttpClient();
@@ -156,6 +183,9 @@ public class EquipmentModelController implements MainActivity.refreshListener {
         return objects;
     }
 
+    /**
+     * Allows asynchronously downloading strings in the background.
+     */
     private class DownloadEquipmentTask extends AsyncTask<String, Integer, String> {
 
         protected String doInBackground(String... urls) {

@@ -29,20 +29,25 @@ public class DetailFragment extends Fragment implements EquipmentModelController
     // http://stackoverflow.com/questions/14083950/duplicate-id-tag-null-or-parent-id-with-another-fragment-for-com-google-android
     private static View view;
 
+    /**
+     * Callback for when this fragment is created
+     * @param savedInstanceState unused, except by super
+     */
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
     }
 
+    /**
+     * Callback for when this fragment's view is created
+     * @param inflater Utility object
+     * @param container Where this object will be inserted
+     * @param savedInstanceState Unused
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
-        // If activity recreated (such as from screen rotate), restore
-        // the previous article selection set by onSaveInstanceState().
-        // This is primarily necessary when in the two-pane layout.
-        if (savedInstanceState != null) {
-            // TODO
-        }
 
         // http://stackoverflow.com/questions/14083950/duplicate-id-tag-null-or-parent-id-with-another-fragment-for-com-google-androi
         if(view != null){
@@ -59,6 +64,11 @@ public class DetailFragment extends Fragment implements EquipmentModelController
         return view;
     }
 
+    /**
+     * Callback for when the view for this fragment has been successfully created. We can now access its child Views
+     * @param view Inflated View
+     * @param savedInstanceState Retrieve what item to select, if possible/necessary
+     */
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState){
         // TODO: Upgrade to using newInstance() static method and bundle and parcelable
@@ -74,6 +84,10 @@ public class DetailFragment extends Fragment implements EquipmentModelController
         }
     }
 
+    /**
+     * Update the View for a given Equipment object
+     * @param pos Index of the Equipment object in the current shared data model
+     */
     public void showEquipmentDetailsFor(int pos) {
         if (equipment.size() <= pos) return;
 

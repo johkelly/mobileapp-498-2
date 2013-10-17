@@ -28,6 +28,12 @@ public class EquipmentAdapter extends ArrayAdapter<Equipment>{
     private int layoutResId;
     private List<Equipment> data;
 
+    /**
+     * Ctor allowing creation-time possession of data
+     * @param context
+     * @param layoutResId
+     * @param data
+     */
     public EquipmentAdapter(Context context, int layoutResId, Equipment[] data){
         super(context, layoutResId, data);
         this.context = context;
@@ -35,6 +41,11 @@ public class EquipmentAdapter extends ArrayAdapter<Equipment>{
         this.data = Arrays.asList(data);
     }
 
+    /**
+     * Ctor allowing late possession of data
+     * @param context
+     * @param layoutResId
+     */
     public EquipmentAdapter(Context context, int layoutResId){
         super(context, layoutResId);
         this.context = context;
@@ -42,6 +53,10 @@ public class EquipmentAdapter extends ArrayAdapter<Equipment>{
         data = new ArrayList<Equipment>();
     }
 
+    /**
+     * Begin possessing a new List of data
+     * @param newData New List to possess
+     */
     public void bindToList(List<Equipment> newData){
         data = newData;
     }
@@ -51,6 +66,13 @@ public class EquipmentAdapter extends ArrayAdapter<Equipment>{
         return data.size();
     }
 
+    /**
+     * Return an inflated and populated view to use as a row in a ListView for the given object at pos
+     * @param pos Index of the item the inflated view is for
+     * @param convertView Old view to reuse, if possible
+     * @param parent View the returned view will go into
+     * @return An inflated and populated view to use as a row in a ListView for the given object at pos
+     */
     @Override
     public View getView(int pos, View convertView, ViewGroup parent){
         View row = convertView;
@@ -76,6 +98,9 @@ public class EquipmentAdapter extends ArrayAdapter<Equipment>{
         return row;
     }
 
+    /**
+     * Basically a convenience struct
+     */
     static class ItemHolder{
         ImageView thumbnail;
         TextView name;
