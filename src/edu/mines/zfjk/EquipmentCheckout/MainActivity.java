@@ -2,7 +2,11 @@ package edu.mines.zfjk.EquipmentCheckout;
 
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -35,7 +39,9 @@ public class MainActivity extends Activity implements DetailsFragmentDispatcher 
         }
         setContentView(R.layout.inventory_listing);
         if (findViewById(R.id.solo_fragment_container) != null) {
-            getFragmentManager().beginTransaction().add(R.id.solo_fragment_container, new InventoryFragment(), "inventory_fragment").commit();
+            InventoryFragment inv = (InventoryFragment) new InventoryFragment();
+            inv.emc = emc;
+            getFragmentManager().beginTransaction().add(R.id.solo_fragment_container, inv, "inventory_fragment").commit();
             getFragmentManager().executePendingTransactions();
         }
         emc.registerListener((EquipmentModelController.EquipmentModelListener) getFragmentManager().findFragmentByTag("inventory_fragment"));
@@ -62,7 +68,40 @@ public class MainActivity extends Activity implements DetailsFragmentDispatcher 
     }
 
     @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        // TODO Auto-generated method stub
+
+        super.onConfigurationChanged(newConfig);
+
+        if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            Log.d("DERP", "Hi mom. portrait");
+        } else if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            Log.d("DERP", "landscape");
+        }
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        SharedPreferences prefs = getPreferences(Context.MODE_PRIVATE);
+
+        if (prefs.contains("selection") && findViewById(R.id.solo_fragment_container) == null) {
+            int i = prefs.getInt("selection", 0);
+            displayDetailsFor(i);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        emc.stashData(getPreferences(Context.MODE_PRIVATE));
+    }
+
+    @Override
     public void displayDetailsFor(int pos) {
+        if (emc.getAllObjects().size() <= pos) return;
         FragmentManager fm = getFragmentManager();
         // Multi pane layout with multiple fragments in layout
         if (findViewById(R.id.solo_fragment_container) == null) {

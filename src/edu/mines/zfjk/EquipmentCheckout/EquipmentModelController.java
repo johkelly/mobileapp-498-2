@@ -112,6 +112,7 @@ public class EquipmentModelController implements MainActivity.refreshListener {
 
                 objects.add(e);
             }
+
         } catch (Exception e) {
             Log.e(EquipmentModelController.class.getName(), e.getStackTrace().toString());
             e.printStackTrace();

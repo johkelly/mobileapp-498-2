@@ -1,5 +1,7 @@
 package edu.mines.zfjk.EquipmentCheckout;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 
 import android.app.Fragment;
@@ -73,6 +75,8 @@ public class DetailFragment extends Fragment implements EquipmentModelController
     }
 
     public void showEquipmentDetailsFor(int pos) {
+        if (equipment.size() <= pos) return;
+
         Equipment e = equipment.get(pos);
 
         TextView nameView = (TextView) getView().findViewById(R.id.detail_name);
@@ -95,5 +99,6 @@ public class DetailFragment extends Fragment implements EquipmentModelController
     @Override
     public void modelUpdate(List<Equipment> newModel) {
         equipment = newModel;
+
     }
 }
